@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+:root {
+    --color-primary-dark: #551db0;
+    --color-primary-normal: #722ed1;
+    --color-primary-light: #8d4eda;
+    --color-primary-light-extra: #f5e8ff;
+
+    --font-color-normal: #333333;
+    --font-color-light: #666666;
+
+    --font-weight: 500;
+
+    --font-size-large-extra: 1.15rem;
+    --font-size-large: 1rem;
+    --font-size-normal: 0.875rem;
+    --font-size-small: 0.75rem;
+
+    --line-height-normal: 1.5rem;
+}

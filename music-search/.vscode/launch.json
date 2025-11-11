@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MusicSearchApplication<music-search>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.music_search.MusicSearchApplication",
+            "projectName": "music-search",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

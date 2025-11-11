@@ -1,0 +1,23 @@
+CREATE TABLE `songs` (
+  `song_id` int NOT NULL AUTO_INCREMENT COMMENT '歌曲唯一ID，主键',
+  `song_name` varchar(255) NOT NULL COMMENT '歌曲名称',
+  `singer_id` int DEFAULT NULL COMMENT '歌手ID（为以后连接歌手表预留）',
+  `singer_name` varchar(255) DEFAULT NULL COMMENT '歌手姓名（方便直接查询）',
+  `album_name` varchar(255) DEFAULT NULL COMMENT '专辑名称',
+  `file_url` varchar(500) DEFAULT NULL COMMENT '音乐文件路径/URL',
+  `cover_url` varchar(500) DEFAULT NULL COMMENT '歌曲封面图片路径/URL',
+  `duration` time DEFAULT NULL COMMENT '歌曲时长',
+  `like_count` int DEFAULT '0' COMMENT '点赞数量，默认值为0',
+  `status` tinyint DEFAULT '1' COMMENT '歌曲状态：0-下架,1-正常,2-冻结',
+  `song_recommended` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '歌曲推荐：false/true',
+  `singer_recommended` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '歌手推荐：false/true',
+  `frozen_time` timestamp NULL DEFAULT NULL COMMENT '冻结时间，NULL表示未冻结',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+  PRIMARY KEY (`song_id`),
+  KEY `idx_like_count` (`like_count` DESC),
+  KEY `idx_singer` (`singer_name`),
+  KEY `idx_status` (`status`),
+  KEY `idx_frozen_time` (`frozen_time`),
+  KEY `idx_song_name` (`song_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='歌曲信息表';
