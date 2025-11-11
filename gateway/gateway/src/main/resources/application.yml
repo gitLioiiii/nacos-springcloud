@@ -1,0 +1,52 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              "[/**]":
+                # allowed-origin-patterns: "*"
+                allowed-origins: "*"
+                allowed-methods: "*"
+                allowed-headers: "*"
+                # allow-credentials: true
+          routes:
+            # 原有路由
+            - id: file
+              uri: lb://file
+              predicates:
+                - Path=/file/**
+              filters:
+                - Log
+            - id: music
+              uri: lb://music
+              predicates:
+                - Path=/music/**
+              filters:
+                - Log
+            - id: singer
+              uri: lb://singer
+              predicates:
+                - Path=/singer/**
+              filters:
+                - Log
+            # 演示自定义断言和过滤器的路由
+            # 测试方法：使用Postman或HOPPSCOTCH发送POST请求到 http://localhost:9999/search
+            # Auth断言已注释，允许前端直接访问
+            - id: music-search
+              uri: http://localhost:8082
+              predicates:
+                - Path=/search
+                # 添加请求头断言，需要包含Authorization请求头（已注释以支持前端访问）
+                # - Auth=Authorization
+              filters:
+                - AddResponseHeader=x-demo-id,123
+                - Log
